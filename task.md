@@ -44,18 +44,18 @@ Create a clean Express + TypeScript backend foundation.
 
 Connect MongoDB using Mongoose.
 
-* [ ] Install/configure Mongoose
-* [ ] Create database connection
-* [ ] Add connection error handling
-* [ ] Add graceful shutdown
-* [ ] Create database configuration
-* [ ] Verify MongoDB connection
+* [x] Install/configure Mongoose
+* [x] Create database connection
+* [x] Add connection error handling
+* [x] Add graceful shutdown
+* [x] Create database configuration
+* [x] Verify MongoDB connection
 
 ### Verify
 
-* [ ] Server connects successfully
-* [ ] Connection failure is handled properly
-* [ ] Build passes
+* [x] Server connects successfully
+* [x] Connection failure is handled properly
+* [x] Build passes
 
 ---
 

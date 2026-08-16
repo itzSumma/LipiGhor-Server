@@ -11,6 +11,7 @@ const envSchema = z.object({
     .default('5000'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   CORS_ORIGIN: z.string().default('*'),
+  MONGODB_URI: z.string().min(1, 'MONGODB_URI is required'),
 });
 
 const parsed = envSchema.safeParse(process.env);
