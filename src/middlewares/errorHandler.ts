@@ -7,9 +7,10 @@ import { handleCastError } from '../errors/handleCastError';
 import { handleDuplicateError } from '../errors/handleDuplicateError';
 import { IGenericErrorMessage } from '../types';
 import { ZodError } from 'zod';
+import mongoose from 'mongoose';
 
 export const errorHandler = (
-  err: any,
+  err: Error & { statusCode?: number; code?: number; keyValue?: Record<string, string> },
   req: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +29,7 @@ export const errorHandler = (
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
   } else if (err?.name === 'CastError') {
-    const simplifiedError = handleCastError(err);
+    const simplifiedError = handleCastError(err as mongoose.Error.CastError);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;

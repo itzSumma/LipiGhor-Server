@@ -65,21 +65,21 @@ Connect MongoDB using Mongoose.
 
 Create reusable infrastructure before feature modules.
 
-* [ ] Create modular folder structure
-* [ ] Create custom `AppError`
-* [ ] Create centralized error middleware
-* [ ] Create async handler
-* [ ] Create API response utility
-* [ ] Create validation middleware
-* [ ] Create pagination utility
-* [ ] Create common types
-* [ ] Standardize success/error responses
+* [x] Create modular folder structure
+* [x] Create custom `AppError`
+* [x] Create centralized error middleware
+* [x] Create async handler
+* [x] Create API response utility
+* [x] Create validation middleware
+* [x] Create pagination utility
+* [x] Create common types
+* [x] Standardize success/error responses
 
 ### Verify
 
-* [ ] Error handling tested
-* [ ] Validation tested
-* [ ] Build passes
+* [x] Error handling tested
+* [x] Validation tested
+* [x] Build passes
 
 ---
 

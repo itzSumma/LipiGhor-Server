@@ -1,6 +1,11 @@
 import { IGenericErrorResponse } from '../types';
 
-export const handleDuplicateError = (error: any): IGenericErrorResponse => {
+interface IDuplicateKeyError {
+  keyValue?: Record<string, string>;
+  message?: string;
+}
+
+export const handleDuplicateError = (error: IDuplicateKeyError): IGenericErrorResponse => {
   const keyValue = error.keyValue || {};
   const errorMessages = Object.keys(keyValue).map((key) => {
     return {

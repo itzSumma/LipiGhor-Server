@@ -117,19 +117,20 @@ describe('Phase 03 Common Backend Architecture Tests', () => {
           throw castError;
         })
       );
-
       // MongoDB DuplicateKeyError endpoint
       testApp.get(
         '/test/duplicate-error',
         catchAsync(() => {
-          const duplicateError = new Error('E11000 duplicate key error collection');
-          (duplicateError as any).code = 11000;
-          (duplicateError as any).keyValue = { email: 'test@example.com' };
+          const duplicateError = new Error('E11000 duplicate key error collection') as Error & {
+            code?: number;
+            keyValue?: Record<string, string>;
+          };
+          duplicateError.code = 11000;
+          duplicateError.keyValue = { email: 'test@example.com' };
           throw duplicateError;
         })
       );
 
-      // Validation schema definition
       const testSchema = z.object({
         body: z.object({
           username: z.string().min(3),
@@ -138,13 +139,9 @@ describe('Phase 03 Common Backend Architecture Tests', () => {
       });
 
       // Validation endpoint to test validateRequest
-      testApp.post(
-        '/test/validate',
-        validateRequest(testSchema),
-        (req: Request, res: Response) => {
-          res.status(200).json({ success: true, body: req.body });
-        }
-      );
+      testApp.post('/test/validate', validateRequest(testSchema), (req: Request, res: Response) => {
+        res.status(200).json({ success: true, body: req.body });
+      });
 
       // Wire global errorHandler
       testApp.use(errorHandler);

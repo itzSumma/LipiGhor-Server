@@ -31,4 +31,3 @@ export interface IPaginationResult {
   sortBy: string;
   sortOrder: 'asc' | 'desc';
 }
-
