@@ -33,6 +33,7 @@ export interface IPaginationResult {
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-namespace */
 declare global {
   namespace Express {
     interface Request {
@@ -41,4 +42,3 @@ declare global {
     }
   }
 }
-

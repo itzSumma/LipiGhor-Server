@@ -1,7 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import { toNodeHandler } from 'better-auth/node';
 import { env } from './config/env';
+import { auth } from './config/auth';
+import { authLimiter } from './middlewares/rateLimiter';
+import { UserRoutes } from './modules/users/user.routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { logger } from './utils/logger';
 
@@ -20,6 +24,10 @@ app.use(
     credentials: true,
   })
 );
+
+// Better Auth catch-all (Must be mounted BEFORE body parsing middlewares)
+app.use('/api/auth/*', authLimiter);
+app.all('/api/auth/*', toNodeHandler(auth));
 
 // Body Parsing Middleware
 app.use(express.json({ limit: '10mb' }));
@@ -40,6 +48,9 @@ app.get('/health', (req: Request, res: Response) => {
     env: env.NODE_ENV,
   });
 });
+
+// Domain Routes
+app.use('/api/users', UserRoutes);
 
 // Fallback 404 handler for unmatched routes
 app.use((req: Request, res: Response) => {
